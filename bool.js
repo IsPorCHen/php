@@ -1,3 +1,25 @@
+function showElement(htmlContent) {
+    const existingBox = document.querySelector('.result-box');
+    if(existingBox) {
+        existingBox.remove();
+    }
+
+    const box = document.createElement('div');
+    box.className = 'result-box';
+    box.style.position = 'fixed';
+    box.style.top = '65%';
+    box.style.left = '50%';
+    box.style.transform = 'translateX(-50%)';
+    box.style.padding = '10px 20px';
+    box.style.backgroundColor = '#ffffff';
+    box.style.borderRadius = '8px';
+    box.style.zIndex = '1000';
+
+    box.innerHTML = htmlContent;
+    document.body.appendChild(box);
+
+}
+
 function showMessage(message, isError = false) {
     const messageBox = document.createElement('div');
     messageBox.style.position = 'fixed';
@@ -18,29 +40,28 @@ function showMessage(message, isError = false) {
     }, 3000);
 }
 
+
 function handleFormSubmit(event) {
     event.preventDefault();
 
     const form = document.querySelector('form');
     const formData = new FormData(form);
 
-    fetch('login.php', {
+    fetch('search.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'error') {
-            showMessage(data.message, true);
-        } else if (data.status === 'success') {
-            showMessage(data.message, false);
-            setTimeout(() => {
-                window.location.href = 'search.html';
-            }, 3000);
+    .then(response => response.text())
+    .then (htmlContent => {
+        if (htmlContent.includes('Книга не найдена')){
+            showMessage('Книга не найдена', true);
+        }
+        else {
+            showElement(htmlContent);
         }
     })
     .catch(error => {
-        showMessage('Произошла ошибка при отправке формы.', true);
+        showMessage('Ошибка при выполнении запроса', true);
     });
 }
 
