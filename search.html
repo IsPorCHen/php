@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Search</title>
-        <link rel="stylesheet" href="style.css">
-        <meta charset="UTF-8">
-    </head>
+<head>
+    <title>Search</title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+</head>
 
-    <body>
-        <div class="container">
-            <p>Параметры поиска</p>
-            <input type="text">
-            <button>Поиск</button>
-        </div>
-    </body>
+<body>
+    <div class="container">
+        <p>Параметры поиска</p>
+        <form action="search.php" method="GET">
+            <input type="text" name="book_name" placeholder="Введите название книги" required>
+            <button type="submit">Поиск</button>
+        </form>
+
+        <?php
+        // Включаем поиск при наличии результатов
+        if (isset($_GET['book_name'])) {
+            $book_name = $_GET['book_name'];
+            // Проверка и вывод результата из поиска
+            if (!empty($book_name)) {
+                include 'search.php';
+            }
+        }
+        ?>
+    </div>
+</body>
 </html>

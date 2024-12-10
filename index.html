@@ -4,20 +4,19 @@
         <title>Авторизация</title>
         <link rel="stylesheet" href="style.css">
         <meta charset="UTF-8">
+        <script src="login.js"></script>
     </head>
     <body>
-
         <div class="container">
             <h1>Авторизация</h1>
-            <p>Логин:</p>
-            <input class="login" type="text" required>
-            <p>Пароль:</p>
-            <input class="password" type="password" required>
-
-            <div class="SignIn">
-                <a href="search.html"><button type="button">Войти</button></a>
-            </div>
-
+            <form method="POST" action="login.php">
+                <p>Логин:</p>
+                <input class="login" type="text" name="login" required>
+                <p>Пароль:</p>
+                <input class="password" type="password" name="password" required>
+                <button type="button" onclick="window.location.href='search.html';">Войти</button>
+            </form>
+            <div class="error-message" id="error-message" style="display: none; color: red;"></div>
             <div class="Register">
                 <a href="registration.html">Зарегистрироваться</a>
             </div>
