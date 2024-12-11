@@ -33,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        echo "<div class='results' style='display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;'>";
+        echo "<div class='results' style='display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; overflow-y: auto; max-height: calc(60vh - 120px);'>";
         while ($book = $result->fetch_assoc()) {
             echo "<div class='book-info' style='background-color: #ffffff; border-radius: 8px; padding: 15px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); flex: 1 1 calc(33.333% - 30px); box-sizing: border-box;'>
-                <p><strong>Название:</strong> {$book['name']}</p>
+                <b style='font-size: 20px;'>{$book['name']}</b>
                 <p><strong>Автор:</strong> {$book['author']}</p>
                 <p><strong>Жанр:</strong> {$book['genre']}</p>
                 <p><strong>Дата:</strong> {$book['date']}</p>
