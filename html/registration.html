@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Регистрация</title>
+        <link rel="stylesheet" href="../style.css">
+        <meta charset="UTF-8">
+        <script src="../js/script.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back_ios" />
+    </head>
+    <body>
+        <div class="back">
+            <a href="../index.html">
+                <span class="material-symbols-outlined" title="Вернуться назад" style="color: black;">
+                    arrow_back_ios
+                </span>
+            </a>
+        </div>
+        <form action="../php/code.php" method="post">
+            <div class="container">
+                <h1>Регистрация</h1>
+
+                <p>Имя</p>
+                <input class="name" type="text" name="name" required>
+                <p>Фамилия</p>
+                <input class="surname" type="text" name="surname" required>
+                <p>Дата рождения</p>
+                <input class="date_birthday" type="date" name="date_birthday" required>
+                <p>Почта</p>
+                <input class="mail" type="email" name="mail" required>
+                <p>Логин</p>
+                <input class="login" type="text" name="login" required>
+                <p>Пароль</p>
+                <input class="password" type="password" name="password" required>
+
+                <button type="submit">Сохранить</button>
+            </div>
+        </form>
+    </body>
+</html>
