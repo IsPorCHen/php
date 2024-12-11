@@ -1,27 +1,17 @@
 function showElement(htmlContent) {
-    const existingBox = document.querySelector('.result-box');
-    if(existingBox) {
-        existingBox.remove();
-    }
-
-    const box = document.createElement('div');
-    box.className = 'result-box';
-    box.style.position = 'fixed';
-    box.style.top = '65%';
-    box.style.left = '50%';
-    box.style.transform = 'translateX(-50%)';
-    box.style.padding = '10px 20px';
-    box.style.backgroundColor = '#ffffff';
-    box.style.borderRadius = '8px';
-    box.style.zIndex = '1000';
-
-    box.innerHTML = htmlContent;
-    document.body.appendChild(box);
-
+    const resultsContainer = document.querySelector('.results');
+    resultsContainer.innerHTML = htmlContent;
 }
 
 function showMessage(message, isError = false) {
-    const messageBox = document.createElement('div');
+    let messageBox = document.querySelector('.message-box');
+    
+    if (messageBox) {
+        messageBox.remove();
+    }
+
+    messageBox = document.createElement('div');
+    messageBox.className = 'message-box';
     messageBox.style.position = 'fixed';
     messageBox.style.top = '20px';
     messageBox.style.left = '50%';
@@ -40,7 +30,6 @@ function showMessage(message, isError = false) {
     }, 3000);
 }
 
-
 function handleFormSubmit(event) {
     event.preventDefault();
 
@@ -52,15 +41,14 @@ function handleFormSubmit(event) {
         body: formData
     })
     .then(response => response.text())
-    .then (htmlContent => {
-        if (htmlContent.includes('Книга не найдена')){
-            showMessage('Книга не найдена', true);
-        }
-        else {
+    .then(htmlContent => {
+        if (htmlContent.includes('Книги не найдены')) {
+            showMessage('Книги не найдены', true);
+        } else {
             showElement(htmlContent);
         }
     })
-    .catch(error => {
+    .catch(() => {
         showMessage('Ошибка при выполнении запроса', true);
     });
 }
